@@ -17,23 +17,23 @@
 # limitations under the License.
 #
 # Citrix_Server_Tuning
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" do
+registry_key node[:tuning][:run] do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce" do
+registry_key node[:tuning][:runonce] do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run" do
+registry_key node[:tuning][:run64] do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce" do
+registry_key node[:tuning][:runonce64] do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows" do
+registry_key node[:tuning][:errormode] do
   values [{
     :name => "ErrorMode",
     :type => :dword,
@@ -42,7 +42,7 @@ registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Windows" d
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Memory Management" do
+registry_key node[:tuning][:disable] do
   values [{
     :name => "DisablePagingExecutive",
     :type => :dword,
@@ -51,7 +51,7 @@ registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Ma
   action :create
 end
 
-registry_key "HKEY_USERS\\.DEFAULT\\Control Panel\\Desktop" do
+registry_key node[:tuning][:desktop] do
   values [{
     :name => "ScreenSaveActive",
     :type => :dword,
@@ -60,7 +60,7 @@ registry_key "HKEY_USERS\\.DEFAULT\\Control Panel\\Desktop" do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Executive" do
+registry_key node[:tuning][:worker] do
   values [{
     :name => "AdditionalCriticalWorkerThreads",
     :type => :dword,
@@ -69,7 +69,7 @@ registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Ma
   action :create
 end
  
-registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\FileSystem" do
+registry_key node[:tuning][:filesystem] do
   values [{
     :name => "NTSFDisable8dot3NameCreation",
     :type => :dword,
@@ -78,7 +78,7 @@ registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\FileSystem
   action :create
 end
  
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Lanmanworkstation\\Parameters" do
+registry_key node[:tuning][:lanmanwork] do
   values [{
     :name => "MaxCmds",
     :type => :dword,
@@ -87,7 +87,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Lanmanwor
   action :create
 end  
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\MRxSmb\\Parameters" do
+registry_key node[:tuning][:multi] do
   values [{
     :name => "MultiUserEnabled",
     :type => :dword,
@@ -96,7 +96,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\MRxSmb\\P
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer" do
+registry_key node[:tuning][:explorer] do
   values [{
     :name => "NoRemoteRecursiveEvents",
     :type => :dword,
@@ -105,7 +105,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Lanmanserver\\Parameters" do
+registry_key node[:tuning][:lanmanserver] do
   values [{:name => "MaxWorkItems", :type => :dword, :data => 8192},
           {:name => "MaxMpxCt", :type => :dword, :data => 2048},
           {:name => "MaxRawWorkItems", :type => :dword, :data => 512},
@@ -116,21 +116,21 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Lanmanser
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters" do
+registry_key node[:tuning][:lanmanwork] do
   values [{:name => "DisableBandwidthThrottling", :type => :dword, :data => 00000001},
           {:name => "DisableLargeMtu", :type => :dword, :data => 00000000}
          ]
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SessionManager\\Configuration Manager" do
+registry_key node[:tuning][:config] do
   values [{:name => "RegistryLazyFlushInterval", :type => :dword, :data => 00000060}
          ]
   recursive true       
   action :create  
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management" do
+registry_key node[:tuning][:disable] do
   values [{
     :name => "ClearPageFileAtShutdown",
     :type => :dword,
@@ -139,7 +139,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Ma
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\Currentversion\\NetCache" do
+registry_key node[:tuning][:netcache] do
   values [{
     :name => "Enabled",
     :type => :dword,
@@ -148,7 +148,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\Currentversion\\
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\OptimalLayout" do
+registry_key node[:tuning][:opt] do
   values [{
     :name => "EnableAutoLayout",
     :type => :dword,
@@ -157,7 +157,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\BNNS\\Parameters" do
+registry_key node[:tuning][:bnns] do
   values [{
     :name => "EnableOffload",
     :type => :dword,
@@ -167,7 +167,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\BNNS\\Par
   action :create
 end   
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters" do
+registry_key node[:tuning][:tcpip] do
   values [{
     :name => "DisableTaskOffload",
     :type => :dword,
@@ -177,7 +177,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Pa
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control" do
+registry_key node[:tuning][:ctrl] do
   values [{
     :name => "ServicesPipeTimeout",
     :type => :dword,
@@ -186,7 +186,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control" do
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters" do
+registry_key node[:tuning][:tcpip6] do
   values [{
     :name => "DisableComponents",
     :type => :dword,
@@ -195,7 +195,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\P
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Quota System" do
+registry_key node[:tuning][:dfss] do
   values [{
     :name => "EnableCpuQuota",
     :type => :dword,
@@ -204,7 +204,7 @@ registry_key "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Ma
   action :create
 end
 
-registry_key "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Dfrg\\BootOptimizeFunction" do
+registry_key node[:tuning][:boot] do
   values [{
     :name => "Enable",
     :type => :dword,
