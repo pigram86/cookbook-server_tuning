@@ -215,3 +215,9 @@ registry_key node[:tuning][:boot] do
   action :create
 end
 
+# if feature installs, schedule a reboot at end of chef run
+windows_reboot 60 do
+  reason 'reboot needed'
+  only_if {reboot_pending?}
+end 
+
