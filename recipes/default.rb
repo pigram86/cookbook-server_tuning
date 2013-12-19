@@ -18,23 +18,23 @@
 #
 
 # Citrix_Server_Tuning
-registry_key node[:tuning][:run] do
+registry_key node['tuning']['run'] do
   action :create
 end
 
-registry_key node[:tuning][:runonce] do
+registry_key node['tuning']['runonce'] do
   action :create
 end
 
-registry_key node[:tuning][:run64] do
+registry_key node['tuning']['run64'] do
   action :create
 end
 
-registry_key node[:tuning][:runonce64] do
+registry_key node['tuning']['runonce64'] do
   action :create
 end
 
-registry_key node[:tuning][:errormode] do
+registry_key node['tuning']['errormode'] do
   values [{
     :name => "ErrorMode",
     :type => :dword,
@@ -43,7 +43,7 @@ registry_key node[:tuning][:errormode] do
   action :create
 end
 
-registry_key node[:tuning][:disable] do
+registry_key node['tuning']['disable'] do
   values [{
     :name => "DisablePagingExecutive",
     :type => :dword,
@@ -52,7 +52,7 @@ registry_key node[:tuning][:disable] do
   action :create
 end
 
-registry_key node[:tuning][:desktop] do
+registry_key node['tuning']['desktop'] do
   values [{
     :name => "ScreenSaveActive",
     :type => :dword,
@@ -61,7 +61,7 @@ registry_key node[:tuning][:desktop] do
   action :create
 end
 
-registry_key node[:tuning][:worker] do
+registry_key node['tuning']['worker'] do
   values [{
     :name => "AdditionalCriticalWorkerThreads",
     :type => :dword,
@@ -70,7 +70,7 @@ registry_key node[:tuning][:worker] do
   action :create
 end
  
-registry_key node[:tuning][:filesystem] do
+registry_key node['tuning']['filesystem'] do
   values [{
     :name => "NTSFDisable8dot3NameCreation",
     :type => :dword,
@@ -79,7 +79,7 @@ registry_key node[:tuning][:filesystem] do
   action :create
 end
  
-registry_key node[:tuning][:lanmanwork] do
+registry_key node['tuning']['lanmanwork'] do
   values [{
     :name => "MaxCmds",
     :type => :dword,
@@ -88,7 +88,7 @@ registry_key node[:tuning][:lanmanwork] do
   action :create
 end  
 
-registry_key node[:tuning][:multi] do
+registry_key node['tuning']['multi'] do
   values [{
     :name => "MultiUserEnabled",
     :type => :dword,
@@ -97,7 +97,7 @@ registry_key node[:tuning][:multi] do
   action :create
 end
 
-registry_key node[:tuning][:explorer] do
+registry_key node['tuning']['explorer'] do
   values [{
     :name => "NoRemoteRecursiveEvents",
     :type => :dword,
@@ -106,7 +106,7 @@ registry_key node[:tuning][:explorer] do
   action :create
 end
 
-registry_key node[:tuning][:lanmanserver] do
+registry_key node['tuning']['lanmanserver'] do
   values [{:name => "MaxWorkItems", :type => :dword, :data => 8192},
           {:name => "MaxMpxCt", :type => :dword, :data => 2048},
           {:name => "MaxRawWorkItems", :type => :dword, :data => 512},
@@ -117,21 +117,21 @@ registry_key node[:tuning][:lanmanserver] do
   action :create
 end
 
-registry_key node[:tuning][:lanmanwork] do
+registry_key node['tuning']['lanmanwork'] do
   values [{:name => "DisableBandwidthThrottling", :type => :dword, :data => 00000001},
           {:name => "DisableLargeMtu", :type => :dword, :data => 00000000}
          ]
   action :create
 end
 
-registry_key node[:tuning][:config] do
+registry_key node['tuning']['config'] do
   values [{:name => "RegistryLazyFlushInterval", :type => :dword, :data => 00000060}
          ]
   recursive true       
   action :create  
 end
 
-registry_key node[:tuning][:disable] do
+registry_key node['tuning']['disable'] do
   values [{
     :name => "ClearPageFileAtShutdown",
     :type => :dword,
@@ -140,7 +140,7 @@ registry_key node[:tuning][:disable] do
   action :create
 end
 
-registry_key node[:tuning][:netcache] do
+registry_key node['tuning']['netcache'] do
   values [{
     :name => "Enabled",
     :type => :dword,
@@ -149,7 +149,7 @@ registry_key node[:tuning][:netcache] do
   action :create
 end
 
-registry_key node[:tuning][:opt] do
+registry_key node['tuning']['opt'] do
   values [{
     :name => "EnableAutoLayout",
     :type => :dword,
@@ -158,7 +158,7 @@ registry_key node[:tuning][:opt] do
   action :create
 end
 
-registry_key node[:tuning][:bnns] do
+registry_key node['tuning']['bnns'] do
   values [{
     :name => "EnableOffload",
     :type => :dword,
@@ -168,7 +168,7 @@ registry_key node[:tuning][:bnns] do
   action :create
 end   
 
-registry_key node[:tuning][:tcpip] do
+registry_key node['tuning']['tcpip'] do
   values [{
     :name => "DisableTaskOffload",
     :type => :dword,
@@ -178,7 +178,7 @@ registry_key node[:tuning][:tcpip] do
   action :create
 end
 
-registry_key node[:tuning][:ctrl] do
+registry_key node['tuning']['ctrl'] do
   values [{
     :name => "ServicesPipeTimeout",
     :type => :dword,
@@ -187,7 +187,7 @@ registry_key node[:tuning][:ctrl] do
   action :create
 end
 
-registry_key node[:tuning][:tcpip6] do
+registry_key node['tuning']['tcpip6'] do
   values [{
     :name => "DisableComponents",
     :type => :dword,
@@ -196,7 +196,7 @@ registry_key node[:tuning][:tcpip6] do
   action :create
 end
 
-registry_key node[:tuning][:dfss] do
+registry_key node['tuning']['dfss'] do
   values [{
     :name => "EnableCpuQuota",
     :type => :dword,
@@ -205,7 +205,7 @@ registry_key node[:tuning][:dfss] do
   action :create
 end
 
-registry_key node[:tuning][:boot] do
+registry_key node['tuning']['boot'] do
   values [{
     :name => "Enable",
     :type => :dword,
