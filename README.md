@@ -1,4 +1,4 @@
-# citrix_server_tuning cookbook
+# server_tuning cookbook
 This cookbook is for optimizing a RDSH and/or Citrix XenApp or XenDesktop 7 hosted shared Windows 2008 R2 or Windows 2012 server.
 
 
@@ -12,7 +12,7 @@ depends "windows"
 Use this cookbook on all RDSh installs by adding it to the run list
 
 
-citrix_server_tuning::default
+server_tuning::default
 
 
 # Attributes
@@ -62,9 +62,15 @@ default[:tuning][:dfss] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Contro
 
 default[:tuning][:boot] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Dfrg\\BootOptimizeFunction"
 
+default['tuning']['defender'] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender"
+
+default['tuning']['procsched'] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl"
+
+default['tuning']['power'] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\explorer\\ControlPanel\\NameSpace\\{025A5937-A6BE-4686-A844-36FE4BEC8B6D}"
+
 # Recipes
 
-citrix_server_tuning::default
+server_tuning::default
 
 registry_key node[:tuning][:run] do
   action :create
@@ -262,6 +268,40 @@ registry_key node[:tuning][:boot] do
   recursive true  
   action :create
 end
+
+# disable Windows Defender
+registry_key node['tuning']['defender'] do
+  values [{
+    :name => "DisableAntiSpyware",
+    :type => :dword,
+    :data => 00000001
+    }]
+  recursive true
+  action :create
+end
+
+# setting Processor scheudling to programs
+registry_key node['tuning']['procsched'] do
+  values [{
+    :name => "Win32PrioritySeparation"
+    :type => :dword
+    :data => 26
+    }]
+  recursive true
+  action :create
+end
+
+# Set Power Option to High Performance
+registry_key node['tuning']['power'] do
+  values [{
+    :name => "PreferredPlan"
+    :type => :string
+    :data => "8c5e7fda-e8bf-4a96-9ab5-a6e23a8c635c"
+    }]
+  recursie true
+  action :create
+end
+
 
 
 

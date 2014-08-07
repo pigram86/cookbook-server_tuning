@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: citrix_server_tuning
+# Cookbook Name:: server_tuning
 # Recipe:: default
 #
 # Copyright (C) 2013 Todd Pigram
@@ -17,20 +17,24 @@
 # limitations under the License.
 #
 
-# Citrix_Server_Tuning
+#Server_Tuning
 registry_key node['tuning']['run'] do
+  recursive true
   action :create
 end
 
 registry_key node['tuning']['runonce'] do
+  recursive true
   action :create
 end
 
 registry_key node['tuning']['run64'] do
+  recursive true
   action :create
 end
 
 registry_key node['tuning']['runonce64'] do
+  recursive true
   action :create
 end
 
@@ -40,6 +44,7 @@ registry_key node['tuning']['errormode'] do
     :type => :dword,
     :data => 00000002
     }]
+  recursive true
   action :create
 end
 
@@ -49,6 +54,7 @@ registry_key node['tuning']['disable'] do
     :type => :dword,
     :data => 00000001
     }]
+  recursive true
   action :create
 end
 
@@ -58,15 +64,18 @@ registry_key node['tuning']['desktop'] do
     :type => :dword,
     :data => "0"
     }]
+  recursive true
   action :create
 end
 
+# Worker Threads
 registry_key node['tuning']['worker'] do
   values [{
     :name => "AdditionalCriticalWorkerThreads",
     :type => :dword,
-    :data => 00000064
+    :data => 64
     }]
+  recursive true
   action :create
 end
  
@@ -76,36 +85,44 @@ registry_key node['tuning']['filesystem'] do
     :type => :dword,
     :data => 0000001
     }]
+  recursive true
   action :create
 end
- 
+
+# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['lanmanwork'] do
   values [{
     :name => "MaxCmds",
     :type => :dword,
     :data => 2048
     }]
+  recursive true
   action :create
 end  
 
+# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['multi'] do
   values [{
     :name => "MultiUserEnabled",
     :type => :dword,
     :data => 00000001
     }]
+  recursive true
   action :create
 end
 
+# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['explorer'] do
   values [{
     :name => "NoRemoteRecursiveEvents",
     :type => :dword,
     :data => 00000001
     }]
+  recursive true
   action :create
 end
 
+# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['lanmanserver'] do
   values [{:name => "MaxWorkItems", :type => :dword, :data => 8192},
           {:name => "MaxMpxCt", :type => :dword, :data => 2048},
@@ -117,6 +134,7 @@ registry_key node['tuning']['lanmanserver'] do
   action :create
 end
 
+# SMB 2.x CLient Tuning
 registry_key node['tuning']['lanmanwork'] do
   values [{:name => "DisableBandwidthThrottling", :type => :dword, :data => 00000001},
           {:name => "DisableLargeMtu", :type => :dword, :data => 00000000}
@@ -125,8 +143,11 @@ registry_key node['tuning']['lanmanwork'] do
 end
 
 registry_key node['tuning']['config'] do
-  values [{:name => "RegistryLazyFlushInterval", :type => :dword, :data => 00000060}
-         ]
+  values [{
+    :name => "RegistryLazyFlushInterval", 
+    :type => :dword, 
+    :data => 60
+    }]
   recursive true       
   action :create  
 end
@@ -137,6 +158,7 @@ registry_key node['tuning']['disable'] do
     :type => :dword,
     :data => 00000000
     }]
+  recursive true
   action :create
 end
 
@@ -146,6 +168,7 @@ registry_key node['tuning']['netcache'] do
     :type => :dword,
     :data => 00000000
     }]
+  recursive true
   action :create
 end
 
@@ -155,6 +178,7 @@ registry_key node['tuning']['opt'] do
     :type => :dword,
     :data => 00000000
     }]
+  recursive true
   action :create
 end
 
@@ -184,6 +208,7 @@ registry_key node['tuning']['ctrl'] do
     :type => :dword,
     :data => 00060000
     }]
+  recursive true
   action :create
 end
 
@@ -193,6 +218,7 @@ registry_key node['tuning']['tcpip6'] do
     :type => :dword,
     :data => 0xffffffff
     }]
+  recursive true
   action :create
 end
 
@@ -202,6 +228,7 @@ registry_key node['tuning']['dfss'] do
     :type => :dword,
     :data => 00000000
     }]
+  recursive true
   action :create
 end
 
@@ -215,9 +242,52 @@ registry_key node['tuning']['boot'] do
   action :create
 end
 
-# if feature installs, schedule a reboot at end of chef run
-windows_reboot 60 do
-  reason 'reboot needed'
+# disable Windows Defender
+registry_key node['tuning']['defender'] do
+  values [{
+    :name => "DisableAntiSpyware",
+    :type => :dword,
+    :data => 00000001
+    }]
+  recursive true
+  action :create
+end
+
+# setting Processor scheudling to programs
+registry_key node['tuning']['procsched'] do
+  values [{
+    :name => "Win32PrioritySeparation",
+    :type => :dword,
+    :data => 0x00000026
+    }]
+  recursive true
+  action :create
+end
+
+# Set Power Option to High Performance
+registry_key node['tuning']['power'] do
+  values [{
+    :name => "PreferredPlan",
+    :type => :string,
+    :data => "8c5e7fda-e8bf-4a96-9ab5-a6e23a8c635c"
+    }]
+  recursive true
+  action :create
+end
+
+# disable hibernation
+#registry_key node['tuning']['hibernation'] do
+#  values [{
+#    :name => "Heuristics",
+#    :type => :binary,
+#    :data => "05 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 3f 42 0f 00"
+#    }]
+#    recursive true
+#    action :create
+#end
+
+windows_reboot 30 do
+  reason 'Chef said so'
   only_if {reboot_pending?}
 end 
 
