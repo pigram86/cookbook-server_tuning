@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: citrix_server_tuning
+# Cookbook Name:: server_tuning
 # Recipe:: default
 #
 # Copyright (C) 2013 Todd Pigram
@@ -43,5 +43,8 @@ default['tuning']['defender'] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Window
 default['tuning']['procsched'] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl"
 default['tuning']['power'] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\explorer\\ControlPanel\\NameSpace\\{025A5937-A6BE-4686-A844-36FE4BEC8B6D}"
 default['tuning']['hibernation'] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power"
+default['tuning']['netlogon'] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Netlogon\\Parameters"
+default['tuning']['timeout'] = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control"
+default['config']['autoupdate'] = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsUpdate\\Auto Update"
 
 

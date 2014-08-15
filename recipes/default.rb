@@ -134,7 +134,7 @@ registry_key node['tuning']['lanmanserver'] do
   action :create
 end
 
-# SMB 2.x CLient Tuning
+# SMB 2.x Client Tuning
 registry_key node['tuning']['lanmanwork'] do
   values [{:name => "DisableBandwidthThrottling", :type => :dword, :data => 00000001},
           {:name => "DisableLargeMtu", :type => :dword, :data => 00000000}
@@ -285,6 +285,36 @@ end
 #    recursive true
 #    action :create
 #end
+
+# disable machine acct password changes
+registry_key node['tuning']['netlogon'] do
+  values [{
+    :name => "DisablePasswordChange", 
+    :type => :dword, 
+    :data => 1
+    }]
+    recursive true
+    action :create
+end
+
+# increase service startup timeout
+registry_key node['tuning']['timeout'] do
+  values [{
+    :name => "ServicePipeTimeout",
+    :type => :dword,
+    :data => 600000
+    }]
+    recursive true
+    action :create
+end
+
+#set windows update to Check only
+registry_key node['config']['autoupdate'] do 
+  values [{:name => "AUOptions", :type => :dword, :data => 00000002},
+          {:name => "IncludeRecommendedUpdates", :type => :dword, :data => 00000000}
+         ]
+  action :create
+end
 
 windows_reboot 30 do
   reason 'Chef said so'
