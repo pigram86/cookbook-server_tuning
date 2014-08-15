@@ -116,7 +116,9 @@ registry_key node['tuning']['desktop'] do
   action :create
 end
 
-# Worker Threads
+Worker Threads
+--------------
+
 registry_key node['tuning']['worker'] do
   values [{
     :name => "AdditionalCriticalWorkerThreads",
@@ -137,7 +139,9 @@ registry_key node['tuning']['filesystem'] do
   action :create
 end
 
-# SMB 1.0 Clinet Optimization 
+SMB 1.0 Tuning
+--------------
+
 registry_key node['tuning']['lanmanwork'] do
   values [{
     :name => "MaxCmds",
@@ -148,7 +152,6 @@ registry_key node['tuning']['lanmanwork'] do
   action :create
 end
 
-# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['multi'] do
   values [{
     :name => "MultiUserEnabled",
@@ -159,7 +162,6 @@ registry_key node['tuning']['multi'] do
   action :create
 end
 
-# SMB 1.0 Clinet Optimization 
 registry_key node['tuning']['explorer'] do
   values [{
     :name => "NoRemoteRecursiveEvents",
@@ -169,8 +171,7 @@ registry_key node['tuning']['explorer'] do
   recursive true
   action :create
 end
-
-# SMB 1.0 Clinet Optimization 
+ 
 registry_key node['tuning']['lanmanserver'] do
   values [{:name => "MaxWorkItems", :type => :dword, :data => 8192},
           {:name => "MaxMpxCt", :type => :dword, :data => 2048},
@@ -182,7 +183,8 @@ registry_key node['tuning']['lanmanserver'] do
   action :create
 end
 
-# SMB 2.x Client Tuning
+SMB 2.x Client Tuning
+---------------------
 registry_key node['tuning']['lanmanwork'] do
   values [{:name => "DisableBandwidthThrottling", :type => :dword, :data => 00000001},
           {:name => "DisableLargeMtu", :type => :dword, :data => 00000000}
@@ -290,7 +292,9 @@ registry_key node['tuning']['boot'] do
   action :create
 end
 
-# disable Windows Defender
+Disable Windows Defender - Needs to be after Desktop Experience is installed
+------------------------
+
 registry_key node['tuning']['defender'] do
   values [{
     :name => "DisableAntiSpyware",
@@ -301,7 +305,9 @@ registry_key node['tuning']['defender'] do
   action :create
 end
 
-# setting Processor scheudling to programs
+Setting Processor scheudling to programs
+-----------------------------------------
+
 registry_key node['tuning']['procsched'] do
   values [{
     :name => "Win32PrioritySeparation",
@@ -312,7 +318,9 @@ registry_key node['tuning']['procsched'] do
   action :create
 end
 
-# Set Power Option to High Performance
+Set Power Option to High Performance
+------------------------------------
+
 registry_key node['tuning']['power'] do
   values [{
     :name => "PreferredPlan",
@@ -323,7 +331,9 @@ registry_key node['tuning']['power'] do
   action :create
 end
 
-# disable machine acct password changes
+Disable machine acct password changes
+-------------------------------------
+
 registry_key node['tuning']['netlogon'] do
   values [{
     :name => "DisablePasswordChange", 
@@ -334,7 +344,9 @@ registry_key node['tuning']['netlogon'] do
     action :create
 end
 
-# increase service startup timeout
+Increase service startup timeout
+---------------------------------
+
 registry_key node['tuning']['timeout'] do
   values [{
     :name => "ServicePipeTimeout",
@@ -345,7 +357,9 @@ registry_key node['tuning']['timeout'] do
     action :create
 end
 
-#set windows update to Check only
+Set windows update to Check only
+--------------------------------
+
 registry_key node['config']['autoupdate'] do 
   values [{:name => "AUOptions", :type => :dword, :data => 00000002},
           {:name => "IncludeRecommendedUpdates", :type => :dword, :data => 00000000}
