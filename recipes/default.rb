@@ -226,7 +226,7 @@ registry_key node['tuning']['dfss'] do
   values [{
     :name => "EnableCpuQuota",
     :type => :dword,
-    :data => 00000000
+    :data => 00000001
     }]
   recursive true
   action :create
